@@ -209,13 +209,18 @@ const admin = [{
     "password": "123"
 }];
 
-export const setLocalStorage = ()=>{
-    localStorage.setItem('employees',JSON.stringify(employees))
-    localStorage.setItem('admin',JSON.stringify(admin))
+export const setLocalStorage = () => {
+    // Only seed if no data exists yet — prevents wiping changes on refresh
+    if (!localStorage.getItem('employees')) {
+        localStorage.setItem('employees', JSON.stringify(employees))
+    }
+    if (!localStorage.getItem('admin')) {
+        localStorage.setItem('admin', JSON.stringify(admin))
+    }
 }
-export const getLocalStorage = ()=>{
+
+export const getLocalStorage = () => {
     const employees = JSON.parse(localStorage.getItem('employees'))
     const admin = JSON.parse(localStorage.getItem('admin'))
-
-    return {employees,admin}
+    return { employees, admin }
 }
